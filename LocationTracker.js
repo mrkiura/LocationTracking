@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {StyleSheet, Text, View } from 'react-native';
+import FlatList from 'react-native/Libraries/CustomComponents/Lists/FlatList';
 
 
 export default class LocationTracker extends Component {
@@ -17,6 +18,7 @@ export default class LocationTracker extends Component {
         latitude: 'not known',
         altitude: 'not known',
       },
+      locations: [],
     }
   };
 
@@ -27,8 +29,11 @@ export default class LocationTracker extends Component {
           longitude: position.coords.longitude,
           latitude: position.coords.latitude,
           altitude: position.coords.altitude,
+          time: position.timestamp
         };
-        this.setState({initialLocation});
+        locations = this.state.locations;
+        locations.push(initialLocation)
+        this.setState({locations});
       },
     (error) => {
       console.log(error.message);
@@ -41,8 +46,11 @@ export default class LocationTracker extends Component {
           longitude: position.coords.longitude,
           latitude: position.coords.latitude,
           altitude: position.coords.altitude,
+          time: Date(position.timestamp).toString()
         };
-        this.setState({latestLocation});
+        locations = this.state.locations;
+        locations.push(latestLocation)
+        this.setState({locations});
      },
     (error) => {
       console.log(error.message);
@@ -54,35 +62,39 @@ export default class LocationTracker extends Component {
     navigator.geolocation.clearWatch(this.watchId);
   }
 
+  renderLocation({item}) {
+    return (
+      <View style={styles.container}>
+          <Text style={styles.title}>CURRENT LOCATION: </Text>
+          <Text>
+            <Text style={styles.title}>Longitude: </Text>
+              {item.longitude}
+          </Text>
+          <Text>
+            <Text style={styles.title}>Latitude: </Text>
+              {item.latitude}
+          </Text>
+          <Text>
+            <Text style={styles.title}>Altitude: </Text>
+              {item.altitude}
+          </Text>
+          <Text>
+            <Text style={styles.title}>Time: </Text>
+              {item.time}
+          </Text>
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
-          <Text style={styles.title}>INITIAL LOCATION: </Text>
-          <Text>
-            <Text style={styles.title}>Longitude: </Text>
-              {this.state.initialLocation.longitude}
-          </Text>
-          <Text>
-            <Text style={styles.title}>Latitude: </Text>
-              {this.state.initialLocation.latitude}
-          </Text>
-          <Text>
-            <Text style={styles.title}>Altitude: </Text>
-              {this.state.initialLocation.altitude}
-          </Text>
-          <Text style={styles.title}>LATEST LOCATION: </Text>
-          <Text>
-            <Text style={styles.title}>Longitude: </Text>
-              {this.state.latestLocation.longitude}
-          </Text>
-          <Text>
-            <Text style={styles.title}>Latitude: </Text>
-              {this.state.latestLocation.latitude}
-          </Text>
-          <Text>
-            <Text style={styles.title}>Altitude: </Text>
-              {this.state.latestLocation.altitude}
-          </Text>
+        <Text style={styles.title}>Locations</Text>
+        <FlatList
+            data={this.state.locations}
+            renderItem={this.renderLocation}
+            keyExtractor={(item, index) => (index)}
+        />
       </View>
     )
   }
