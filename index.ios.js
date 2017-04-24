@@ -10,10 +10,10 @@ import {
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
 
 export default class LocationTracking extends Component {
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -27,7 +27,7 @@ export default class LocationTracking extends Component {
           Cmd+D or shake for dev menu
         </Text>
       </View>
-    );
+    )
   }
 }
 
