@@ -12,7 +12,7 @@ export default class LocationTracker extends Component {
         latitude: 'not known',
         altitude: 'not known'
       },
-      latestLocation: {
+      currentLocation: {
         longitude: 'not known',
         latitude: 'not known',
         altitude: 'not known'
@@ -37,12 +37,12 @@ export default class LocationTracker extends Component {
      )
 
     this.watchId = navigator.geolocation.watchPosition((position) => {
-      let latestLocation = {
+      let currentLocation = {
         longitude: position.coords.longitude,
         latitude: position.coords.latitude,
         altitude: position.coords.altitude
       }
-      this.setState({latestLocation})
+      this.setState({currentLocation})
     },
     (error) => {
       console.log(error.message)
@@ -70,18 +70,18 @@ export default class LocationTracker extends Component {
           <Text style={styles.title}>Altitude: </Text>
           {this.state.initialLocation.altitude}
         </Text>
-        <Text style={styles.title}>LATEST LOCATION: </Text>
+        <Text style={styles.title}>CURRENT LOCATION: </Text>
         <Text>
           <Text style={styles.title}>Longitude: </Text>
-          {this.state.latestLocation.longitude}
+          {this.state.currentLocation.longitude}
         </Text>
         <Text>
           <Text style={styles.title}>Latitude: </Text>
-          {this.state.latestLocation.latitude}
+          {this.state.currentLocation.latitude}
         </Text>
         <Text>
           <Text style={styles.title}>Altitude: </Text>
-          {this.state.latestLocation.altitude}
+          {this.state.currentLocation.altitude}
         </Text>
       </View>
     )
