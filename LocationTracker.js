@@ -57,32 +57,36 @@ export default class LocationTracker extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>INITIAL LOCATION: </Text>
-        <Text>
-          <Text style={styles.title}>Longitude: </Text>
-          {this.state.initialLocation.longitude}
-        </Text>
-        <Text>
-          <Text style={styles.title}>Latitude: </Text>
-          {this.state.initialLocation.latitude}
-        </Text>
-        <Text>
-          <Text style={styles.title}>Altitude: </Text>
-          {this.state.initialLocation.altitude}
-        </Text>
-        <Text style={styles.title}>CURRENT LOCATION: </Text>
-        <Text>
-          <Text style={styles.title}>Longitude: </Text>
-          {this.state.currentLocation.longitude}
-        </Text>
-        <Text>
-          <Text style={styles.title}>Latitude: </Text>
-          {this.state.currentLocation.latitude}
-        </Text>
-        <Text>
-          <Text style={styles.title}>Altitude: </Text>
-          {this.state.currentLocation.altitude}
-        </Text>
+        <View style={styles.textBox}>
+          <Text style={styles.title}>INITIAL LOCATION: </Text>
+          <Text>
+            <Text style={styles.title}>Longitude: </Text>
+            {this.state.initialLocation.longitude}
+          </Text>
+          <Text>
+            <Text style={styles.title}>Latitude: </Text>
+            {this.state.initialLocation.latitude}
+          </Text>
+          <Text>
+            <Text style={styles.title}>Altitude: </Text>
+            {this.state.initialLocation.altitude}
+          </Text>
+        </View>
+        <View style={styles.textBox}>
+          <Text style={styles.title}>CURRENT LOCATION: </Text>
+          <Text>
+            <Text style={styles.title}>Longitude: </Text>
+            {this.state.currentLocation.longitude}
+          </Text>
+          <Text>
+            <Text style={styles.title}>Latitude: </Text>
+            {this.state.currentLocation.latitude}
+          </Text>
+          <Text>
+            <Text style={styles.title}>Altitude: </Text>
+            {this.state.currentLocation.altitude}
+          </Text>
+        </View>
       </View>
     )
   }
@@ -91,5 +95,14 @@ export default class LocationTracker extends Component {
 const styles = StyleSheet.create({
   title: {
     fontWeight: '500'
+  },
+  textBox: {
+    padding: 22
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

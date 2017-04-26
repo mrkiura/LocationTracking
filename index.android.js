@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-import {
-  AppRegistry,
-  View
-} from 'react-native'
+import { AppRegistry } from 'react-native'
 import LocationTracker from './LocationTracker.js'
 
 export default class LocationTracking extends Component {
   render () {
     return (
-      <View>
-        <LocationTracker />
-      </View>
+      <LocationTracker />
     )
   }
 }
